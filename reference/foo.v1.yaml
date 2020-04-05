@@ -1,0 +1,14 @@
+openapi: 3.0.0
+info:
+  title: foo
+  version: '1.0'
+  description: テスト
+servers:
+  - url: 'http://localhost:3000'
+    description: ローカル
+  - url: 'https://foo'
+    description: 本番
+paths: {}
+components:
+  schemas: {}
+  securitySchemes: {}
