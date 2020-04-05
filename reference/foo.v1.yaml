@@ -8,7 +8,72 @@ servers:
     description: ローカル
   - url: 'https://foo'
     description: 本番
-paths: {}
+paths:
+  /users:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    uniqueItems: true
+                    items:
+                      $ref: '#/components/schemas/User'
+                required:
+                  - users
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Error'
+      operationId: get-users
+      description: ''
 components:
-  schemas: {}
+  schemas:
+    User:
+      title: User
+      type: object
+      x-examples:
+        ユーザ:
+          id: 1
+          name: foo
+      description: サンプルユーザ
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      required:
+        - id
+        - name
+    Error:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+      x-examples:
+        メッセージなし:
+          code: some error
+        メッセージあり:
+          code: some error
+          message: Some error has occurred.
+      description: エラー
   securitySchemes: {}
